@@ -8,5 +8,5 @@ xautolock -time 30 -locker 'systemctl hybrid-sleep' -notify 60 -notifier "notify
 fcitx5 &
 
 # run bar script and dwm ( do not remove this )
-~/.config/chadwm/scripts/./bar.sh &
+~/.config/iamchad/scripts/./bar.sh &
 dwm
