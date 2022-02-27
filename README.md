@@ -1,0 +1,2 @@
+# iamchad
+my chadwm 
