@@ -86,6 +86,7 @@ static const Rule rules[] = {
         { "XTerm",          NULL,       NULL,       0,            0,           1,           -1 },
         { "discord",        NULL,       NULL,       1 << 7,       0,           0,           0 },
         { "zoom",           NULL,       NULL,       1 << 8,       1,           1,           -1 },
+        { "YouTube Music",  NULL,       NULL,       1 << 7,       1,           0,           1 },
 };
 
 /* layout(s) */
@@ -131,6 +132,8 @@ static const char *qutebrowser[] = { "/home/john/.customsh/quteopen.sh", NULL };
 static const char *pm[] = { "/home/john/.customsh/pmixer.sh", NULL };
 static const char *gt[] = { "/home/john/.customsh/gotop.sh", NULL };
 static const char *playpause[] = { "playerctl", "play-pause", NULL };
+static const char *pctln[] = { "playerctl", "next", NULL };
+static const char *pctlp[] = { "playerctl", "previous", NULL };
 static const char *mountcmd[] = { "/home/john/.customsh/dmenumount.sh", NULL };
 static const char *umountcmd[] = { "/home/john/.customsh/dmenuumount.sh", NULL };
 
@@ -159,6 +162,8 @@ static Key keys[] = {
     { MODKEY,                          XK_Tab,         view,           {0} },
     { MODKEY|ControlMask,              XK_v,           spawn,          { .v = pm } },
     { MODKEY,                          XK_g,           spawn,          { .v = gt } },
+    { MODKEY,                          XK_F12,         spawn,          { .v = pctln } },
+    { MODKEY,                          XK_F11,         spawn,          { .v = pctlp } },
     { MODKEY,                          XK_F10,         spawn,          { .v = playpause } },
     { MODKEY,                          XK_F8,          spawn,          { .v = mountcmd } },
     { MODKEY,                          XK_F7,          spawn,          { .v = umountcmd } },
@@ -190,7 +195,7 @@ static Key keys[] = {
     { MODKEY,                          XK_w,           killclient,     {0} },
     { MODKEY,                          XK_t,           setlayout,      {.v = &layouts[0]} },
     { MODKEY,                          XK_s,           setlayout,      {.v = &layouts[2]} },
-    { MODKEY,                          XK_c,           setlayout,      {.v = &layouts[6]} },
+    { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[6]} },
     { MODKEY,                          XK_space,       setlayout,      {0} },
     { MODKEY|ControlMask,		           XK_comma,       cyclelayout,    {.i = -1 } },
     { MODKEY|ControlMask,              XK_period,      cyclelayout,    {.i = +1 } },
