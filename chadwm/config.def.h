@@ -136,24 +136,24 @@ static const char *pctln[] = { "playerctl", "next", NULL };
 static const char *pctlp[] = { "playerctl", "previous", NULL };
 static const char *mountcmd[] = { "/home/john/.customsh/dmenumount.sh", NULL };
 static const char *umountcmd[] = { "/home/john/.customsh/dmenuumount.sh", NULL };
-
-
+static const char *gitpass[] = { "echo", "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", "|", "xclip", "-selection", "clipboard", NULL };
 
 static Key keys[] = {
     /* modifier                        key             function        argument */
-    { MODKEY,                          XK_p,           spawn,          {.v = dmenucmd} },
+    { MODKEY,                          XK_p,           spawn,          {.v = dmenucmd } },
     { MODKEY,                          XK_r ,          spawn,          {.v = term }},  
-    { 0,                               XK_Print,       spawn,          {.v = sscmd} },
+    { 0,                               XK_Print,       spawn,          {.v = sscmd } },
     { MODKEY,                          XK_b,           togglebar,      {0} },
-    { MODKEY|ShiftMask,                XK_b,           spawn,          {.v = qutebrowser} },
+    { MODKEY|ShiftMask,                XK_b,           spawn,          {.v = qutebrowser } },
     { MODKEY|ControlMask,              XK_w,           tabmode,        { -1 } },
+    { MODKEY|ControlMask,              XK_p,           spawn,          { .v = gitpass } },
     { MODKEY,                          XK_i,           incnmaster,     {.i = +1 } },
     { MODKEY,                          XK_d,           incnmaster,     {.i = -1 } },
-    { MODKEY,                          XK_h,           setmfact,       {.f = -0.05} },
-    { MODKEY,                          XK_l,           setmfact,       {.f = +0.05} },
-    { MODKEY|ShiftMask,                XK_h,           setcfact,       {.f = +0.25} },
-    { MODKEY|ShiftMask,                XK_l,           setcfact,       {.f = -0.25} },
-    { MODKEY|ShiftMask,                XK_o,           setcfact,       {.f =  0.00} },
+    { MODKEY,                          XK_h,           setmfact,       {.f = -0.05 } },
+    { MODKEY,                          XK_l,           setmfact,       {.f = +0.05 } },
+    { MODKEY|ShiftMask,                XK_h,           setcfact,       {.f = +0.25 } },
+    { MODKEY|ShiftMask,                XK_l,           setcfact,       {.f = -0.25 } },
+    { MODKEY|ShiftMask,                XK_o,           setcfact,       {.f =  0.00 } },
     { MODKEY|ShiftMask,                XK_j,           movestack,      {.i = +1 } },
     { MODKEY|ShiftMask,                XK_k,           movestack,      {.i = -1 } },
     { MODKEY,                          XK_j,           focusstack,     {.i = +1 } },
@@ -189,18 +189,18 @@ static Key keys[] = {
     { MODKEY|ControlMask,              XK_9,           incrovgaps,     {.i = +1 } },
     { MODKEY|ControlMask|ShiftMask,    XK_9,           incrovgaps,     {.i = -1 } },
 
-    { MODKEY|ControlMask,              XK_t,           togglegaps,     {0} },
-    { MODKEY|ControlMask|ShiftMask,    XK_d,           defaultgaps,    {0} },
+    { MODKEY|ControlMask,              XK_t,           togglegaps,     {0 } },
+    { MODKEY|ControlMask|ShiftMask,    XK_d,           defaultgaps,    {0 } },
 
-    { MODKEY,                          XK_w,           killclient,     {0} },
-    { MODKEY,                          XK_t,           setlayout,      {.v = &layouts[0]} },
-    { MODKEY,                          XK_s,           setlayout,      {.v = &layouts[2]} },
-    { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[6]} },
-    { MODKEY,                          XK_space,       setlayout,      {0} },
+    { MODKEY,                          XK_w,           killclient,     {0 } },
+    { MODKEY,                          XK_t,           setlayout,      {.v = &layouts[0] } },
+    { MODKEY,                          XK_s,           setlayout,      {.v = &layouts[2] } },
+    { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[6] } },
+    { MODKEY,                          XK_space,       setlayout,      {0 } },
     { MODKEY|ControlMask,		           XK_comma,       cyclelayout,    {.i = -1 } },
     { MODKEY|ControlMask,              XK_period,      cyclelayout,    {.i = +1 } },
-    { MODKEY|ShiftMask,                XK_space,       togglefloating, {0} },
-    { MODKEY,                          XK_f,           togglefullscr,  {0} },
+    { MODKEY|ShiftMask,                XK_space,       togglefloating, {0 } },
+    { MODKEY,                          XK_f,           togglefullscr,  {0 } },
     { MODKEY,                          XK_grave,       view,           {.ui = ~0 } },
     { MODKEY|ShiftMask,                XK_grave,       tag,            {.ui = ~0 } },
     { MODKEY,                          XK_semicolon,   focusmon,       {.i = -1 } },
@@ -222,10 +222,10 @@ static Key keys[] = {
     TAGKEYS(                           XK_7,                           6)
     TAGKEYS(                           XK_8,                           7)
     TAGKEYS(                           XK_9,                           8)
-    { MODKEY|ControlMask,              XK_q,           quit,           {0} },
-    { MODKEY|ShiftMask,                XK_r,           quit,           {1} },
-    { MODKEY,                          XK_e,           hidewin,        {0} },
-    { MODKEY|ShiftMask,                XK_e,           restorewin,     {0} },
+    { MODKEY|ControlMask,              XK_q,           quit,           {0 } },
+    { MODKEY|ShiftMask,                XK_r,           quit,           {1 } },
+    { MODKEY,                          XK_e,           hidewin,        {0 } },
+    { MODKEY|ShiftMask,                XK_e,           restorewin,     {0 } },
 
 };
 
@@ -233,9 +233,9 @@ static Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
     /* click                event mask      button          function        argument */
-    { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
+    { ClkLtSymbol,          0,              Button1,        setlayout,      {0 } },
     { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-    { ClkWinTitle,          0,              Button2,        zoom,           {0} },
+    { ClkWinTitle,          0,              Button2,        zoom,           {0 } },
     { ClkStatusText,        0,              Button2,        spawn,          {.v = term } },
 
 		/* Keep movemouse? */
