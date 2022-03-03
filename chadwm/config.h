@@ -11,7 +11,7 @@ static       int smartgaps          = 0;        /* 1 means no outer gap when the
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails,display systray on the 1st monitor,False: display systray on last monitor*/
-static const int showsystray        = 1;     /* 0 means no systray */
+static const int showsystray        = 0;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always };
 static const int showtab            = showtab_auto;
@@ -25,7 +25,7 @@ static const int horizpadtabo       = 15;
 static const int scalepreview       = 4;
 static       int tag_preview        = 0;        /* 1 means enable, 0 is off */
 
-static const char *fonts[]          = { "Iosevka:style=Medium:size=10:antialias=true",
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:style=Medium:size=10:antialias=true",
                                         "Material Design Icons-Regular:size=11:antialias=true",
                                       };
 static const int colorfultag        = 1;  /* 0 means use SchemeSel for selected non vacant tag */
@@ -151,11 +151,11 @@ static Key keys[] = {
     { MODKEY,                          XK_d,           incnmaster,     {.i = -1 } },
     { MODKEY,                          XK_h,           setmfact,       {.f = -0.05 } },
     { MODKEY,                          XK_l,           setmfact,       {.f = +0.05 } },
-    { MODKEY|ShiftMask,                XK_h,           setcfact,       {.f = +0.25 } },
-    { MODKEY|ShiftMask,                XK_l,           setcfact,       {.f = -0.25 } },
+    { MODKEY|ShiftMask,                XK_h,           setcfact,       {.f = -0.25 } },
+    { MODKEY|ShiftMask,                XK_l,           setcfact,       {.f = +0.25 } },
     { MODKEY|ShiftMask,                XK_o,           setcfact,       {.f =  0.00 } },
-    { MODKEY|ShiftMask,                XK_j,           movestack,      {.i = +1 } },
-    { MODKEY|ShiftMask,                XK_k,           movestack,      {.i = -1 } },
+    /* { MODKEY|ShiftMask,                XK_j,           movestack,      {.i = +1 } }, */
+    /* { MODKEY|ShiftMask,                XK_k,           movestack,      {.i = -1 } }, */
     { MODKEY,                          XK_j,           focusstack,     {.i = +1 } },
     { MODKEY,                          XK_k,           focusstack,     {.i = -1 } },
     { MODKEY,                          XK_Return,      zoom,           {0} },
