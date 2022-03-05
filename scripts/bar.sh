@@ -6,7 +6,7 @@
 interval=0
 
 # load colors
-. ~/.config/chadwm/scripts/bar_themes/nord
+. ~/.config/iamchad/scripts/bar_themes/nord
 
 cpu() {
 	cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
@@ -55,7 +55,7 @@ wlan() {
 # }
 
 clock() {
-	printf "^c$black^ ^b$darkblue^ 󱑆 "
+	printf "^c$black^^b$darkblue^ 󱑆 "
   printf "^c$blue^^b$grey^ $(date '+%a, %m-%d')"
 	printf "^c$blue^^b$grey^ $(date '+%H:%M')  "
 }

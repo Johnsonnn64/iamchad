@@ -25,8 +25,9 @@ static const int horizpadtabo       = 15;
 static const int scalepreview       = 4;
 static       int tag_preview        = 0;        /* 1 means enable, 0 is off */
 
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:style=Medium:size=10:antialias=true",
-                                        "Material Design Icons-Regular:size=11:antialias=true",
+/* static const char *fonts[]          = { "JetBrainsMono Nerd Font:style=Medium:size=9:antialias=true", */
+static const char *fonts[]          = { "Iosevka:style=Medium:size=10:antialias=true",
+                                        "Material Design Icons-Regular:size=10:antialias=true",
                                       };
 static const int colorfultag        = 1;  /* 0 means use SchemeSel for selected non vacant tag */
 
@@ -59,13 +60,6 @@ static const char *colors[][3]      = {
 /* static char *tags[] = {"󰮯", "󰧞", "󰝥", "󰧞", "󰝥", "󰧞", "󰝥", "󰧞", "󰝥"}; */
 /* static char *tags[] = {"󰮯", "󰑊", "󰝥", "󰑊", "󰝥", "󰑊", "󰝥", "󰑊", "󰝥"}; */
 static char *tags[] = {"󰮯", "󰧞", "󰑊", "󰧞", "󰑊", "󰧞", "󰑊", "󰧞", "󰑊"};
-
-static const char* eww[]      = { "eww", "open" , "eww", NULL };
-
-static const Launcher launchers[] = {
-       /* command       name to display */
-	{ eww,         "" },
-};
 
 static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,
                                   SchemeTag4, SchemeTag5, SchemeTag6,
@@ -127,7 +121,7 @@ static const Layout layouts[] = {
 static const char *term[]  = {  "st", NULL }; // change this to your term
 static const char *sscmd[] = { "scrot", "-F", "screenshot.png", "-o", "-s", "-f", "-e", "mv screenshot.png ~/pictures/ && xclip -selection clipboard -target image/png -i ~/pictures/screenshot.png", NULL};
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", "Iosevka:styel=Medium:size=10", "-l", "12", "-x", "650", "-y", "400", "-z", "620", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "12", "-x", "650", "-y", "400", "-z", "620", NULL };
 static const char *qutebrowser[] = { "/home/john/.customsh/quteopen.sh", NULL };
 static const char *pm[] = { "/home/john/.customsh/pmixer.sh", NULL };
 static const char *gt[] = { "/home/john/.customsh/gotop.sh", NULL };
