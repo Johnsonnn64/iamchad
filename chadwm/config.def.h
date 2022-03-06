@@ -130,7 +130,7 @@ static const char *pctln[] = { "playerctl", "next", NULL };
 static const char *pctlp[] = { "playerctl", "previous", NULL };
 static const char *mountcmd[] = { "/home/john/.customsh/dmenumount.sh", NULL };
 static const char *umountcmd[] = { "/home/john/.customsh/dmenuumount.sh", NULL };
-static const char *gitpass[] = { "echo", "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", "|", "xclip", "-selection", "clipboard", NULL };
+static const char *gitpass[] = { "/home/john/.customsh/gitpass.sh", NULL };
 
 static Key keys[] = {
     /* modifier                        key             function        argument */
