@@ -25,8 +25,8 @@ static const int horizpadtabo       = 15;
 static const int scalepreview       = 4;
 static       int tag_preview        = 0;        /* 1 means enable, 0 is off */
 
-/* static const char *fonts[]          = { "JetBrainsMono Nerd Font:style=Medium:size=9:antialias=true", */
-static const char *fonts[]          = { "Iosevka:style=Medium:size=10:antialias=true",
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:style=Medium:size=9:antialias=true",
+/* static const char *fonts[]          = { "Iosevka:style=Medium:size=10:antialias=true", */
                                         "Material Design Icons-Regular:size=10:antialias=true",
                                       };
 static const int colorfultag        = 1;  /* 0 means use SchemeSel for selected non vacant tag */
