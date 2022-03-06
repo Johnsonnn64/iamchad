@@ -48,8 +48,9 @@ static const char *colors[][3]      = {
     [SchemeTag5]       = { pink,  black, black },
     [SchemeTag6]       = { blue,   black, black },
     [SchemeTag7]       = { green, black,black },
-    [SchemeTag8]       = { yellow, black, black },
-    [SchemeTag9]       = { red,  black, black },
+    /* [SchemeTag8]       = { yellow, black, black }, */
+    /* [SchemeTag9]       = { red,  black, black }, */
+    /* [SchemeTag10]      = { pink,  black, black }, */
     [SchemeLayout]     = { yellow, black, black }, 
     [SchemeBtnPrev]    = { green, black, black }, 
     [SchemeBtnNext]    = { yellow, black, black }, 
@@ -59,11 +60,11 @@ static const char *colors[][3]      = {
 /* tagging */
 /* static char *tags[] = {"󰮯", "󰧞", "󰝥", "󰧞", "󰝥", "󰧞", "󰝥", "󰧞", "󰝥"}; */
 /* static char *tags[] = {"󰮯", "󰑊", "󰝥", "󰑊", "󰝥", "󰑊", "󰝥", "󰑊", "󰝥"}; */
-static char *tags[] = {"󰮯", "󰧞", "󰑊", "󰧞", "󰑊", "󰧞", "󰑊", "󰧞", "󰑊"};
+static char *tags[] = {"󰮯", "󰧞", "󰑊", "󰧞", "󰑊", "󰧞", "󰑊"};
 
-static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,
-                                  SchemeTag4, SchemeTag5, SchemeTag6,
-                                  SchemeTag7, SchemeTag8, SchemeTag9
+static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, 
+                                  SchemeTag5, SchemeTag6, SchemeTag7, 
+                                  /* SchemeTag8, SchemeTag9, SchemeTag10 */ 
                                 };
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
@@ -78,9 +79,9 @@ static const Rule rules[] = {
      */
        	/* class            instance    title       tags mask     iscentered   isfloating   monitor */
         { "XTerm",          NULL,       NULL,       0,            0,           1,           -1 },
-        { "discord",        NULL,       NULL,       1 << 7,       0,           0,           0 },
-        { "zoom",           NULL,       NULL,       1 << 8,       1,           1,           -1 },
-        { "YouTube Music",  NULL,       NULL,       1 << 7,       1,           0,           1 },
+        { "discord",        NULL,       NULL,       1 << 5,       0,           0,           0 },
+        { "zoom",           NULL,       NULL,       1 << 6,       1,           1,           -1 },
+        { "YouTube Music",  NULL,       NULL,       1 << 5,       1,           0,           1 },
 };
 
 /* layout(s) */
@@ -174,14 +175,14 @@ static Key keys[] = {
     { MODKEY|ControlMask,              XK_o,           incrogaps,      {.i = +1 } },
     { MODKEY|ControlMask|ShiftMask,    XK_o,           incrogaps,      {.i = -1 } },
 
-    { MODKEY|ControlMask,              XK_6,           incrihgaps,     {.i = +1 } },
-    { MODKEY|ControlMask|ShiftMask,    XK_6,           incrihgaps,     {.i = -1 } },
-    { MODKEY|ControlMask,              XK_7,           incrivgaps,     {.i = +1 } },
-    { MODKEY|ControlMask|ShiftMask,    XK_7,           incrivgaps,     {.i = -1 } },
-    { MODKEY|ControlMask,              XK_8,           incrohgaps,     {.i = +1 } },
-    { MODKEY|ControlMask|ShiftMask,    XK_8,           incrohgaps,     {.i = -1 } },
-    { MODKEY|ControlMask,              XK_9,           incrovgaps,     {.i = +1 } },
-    { MODKEY|ControlMask|ShiftMask,    XK_9,           incrovgaps,     {.i = -1 } },
+/*     { MODKEY|ControlMask,              XK_6,           incrihgaps,     {.i = +1 } }, */
+/*     { MODKEY|ControlMask|ShiftMask,    XK_6,           incrihgaps,     {.i = -1 } }, */
+/*     { MODKEY|ControlMask,              XK_7,           incrivgaps,     {.i = +1 } }, */
+/*     { MODKEY|ControlMask|ShiftMask,    XK_7,           incrivgaps,     {.i = -1 } }, */
+/*     { MODKEY|ControlMask,              XK_8,           incrohgaps,     {.i = +1 } }, */
+/*     { MODKEY|ControlMask|ShiftMask,    XK_8,           incrohgaps,     {.i = -1 } }, */
+/*     { MODKEY|ControlMask,              XK_9,           incrovgaps,     {.i = +1 } }, */
+/*     { MODKEY|ControlMask|ShiftMask,    XK_9,           incrovgaps,     {.i = -1 } }, */
 
     { MODKEY|ControlMask,              XK_t,           togglegaps,     {0 } },
     { MODKEY|ControlMask|ShiftMask,    XK_d,           defaultgaps,    {0 } },
@@ -211,11 +212,12 @@ static Key keys[] = {
     TAGKEYS(                           XK_2,                           1)
     TAGKEYS(                           XK_3,                           2)
     TAGKEYS(                           XK_4,                           3)
-    TAGKEYS(                           XK_5,                           4)
-    TAGKEYS(                           XK_6,                           5)
-    TAGKEYS(                           XK_7,                           6)
-    TAGKEYS(                           XK_8,                           7)
-    TAGKEYS(                           XK_9,                           8)
+    TAGKEYS(                           XK_8,                           4)
+    TAGKEYS(                           XK_9,                           5)
+    TAGKEYS(                           XK_0,                           6)
+    /* TAGKEYS(                           XK_8,                           7) */
+    /* TAGKEYS(                           XK_9,                           8) */
+    /* TAGKEYS(                           XK_0,                           9) */
     { MODKEY|ControlMask,              XK_q,           quit,           {0 } },
     { MODKEY|ShiftMask,                XK_r,           quit,           {1 } },
     { MODKEY,                          XK_e,           hidewin,        {0 } },
