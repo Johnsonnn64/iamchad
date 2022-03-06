@@ -130,7 +130,7 @@ static const char *pctln[] = { "playerctl", "next", NULL };
 static const char *pctlp[] = { "playerctl", "previous", NULL };
 static const char *mountcmd[] = { "/home/john/.customsh/dmenumount.sh", NULL };
 static const char *umountcmd[] = { "/home/john/.customsh/dmenuumount.sh", NULL };
-static const char *gitpass[] = { "echo", "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", "|", "xclip", "-selection", "clipboard", NULL };
+static const char *gitpass[] = { "/home/john/.customsh/gitpass.sh", NULL };
 
 static Key keys[] = {
     /* modifier                        key             function        argument */
@@ -140,7 +140,7 @@ static Key keys[] = {
     { MODKEY,                          XK_b,           togglebar,      {0} },
     { MODKEY|ShiftMask,                XK_b,           spawn,          {.v = qutebrowser } },
     { MODKEY|ControlMask,              XK_w,           tabmode,        { -1 } },
-    { MODKEY|ControlMask,              XK_p,           spawn,          { .v = gitpass } },
+    { MODKEY|ControlMask,              XK_p,           spawn,          {.v = gitpass } },
     { MODKEY,                          XK_i,           incnmaster,     {.i = +1 } },
     { MODKEY,                          XK_d,           incnmaster,     {.i = -1 } },
     { MODKEY,                          XK_h,           setmfact,       {.f = -0.05 } },

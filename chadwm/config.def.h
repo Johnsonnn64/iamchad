@@ -140,7 +140,7 @@ static Key keys[] = {
     { MODKEY,                          XK_b,           togglebar,      {0} },
     { MODKEY|ShiftMask,                XK_b,           spawn,          {.v = qutebrowser } },
     { MODKEY|ControlMask,              XK_w,           tabmode,        { -1 } },
-    { MODKEY|ControlMask,              XK_p,           spawn,          { .v = gitpass } },
+    { MODKEY|ControlMask,              XK_p,           spawn,          {.v = gitpass } },
     { MODKEY,                          XK_i,           incnmaster,     {.i = +1 } },
     { MODKEY,                          XK_d,           incnmaster,     {.i = -1 } },
     { MODKEY,                          XK_h,           setmfact,       {.f = -0.05 } },
