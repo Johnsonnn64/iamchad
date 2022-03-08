@@ -123,15 +123,15 @@ static const char *term[]  = {  "st", "zsh",  NULL }; // change this to your ter
 static const char *sscmd[] = { "scrot", "-F", "screenshot.png", "-o", "-s", "-f", "-e", "mv screenshot.png ~/pictures/ && xclip -selection clipboard -target image/png -i ~/pictures/screenshot.png", NULL};
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "12", "-x", "650", "-y", "400", "-z", "620", NULL };
-static const char *qutebrowser[] = { "/home/john/.customsh/quteopen.sh", NULL };
-static const char *pm[] = { "/home/john/.customsh/pmixer.sh", NULL };
-static const char *gt[] = { "/home/john/.customsh/gotop.sh", NULL };
+static const char *qutebrowser[] = { "quteopen.sh", NULL };
+static const char *pm[] = { "pmixer.sh", NULL };
+static const char *gt[] = { "gotop.sh", NULL };
 static const char *playpause[] = { "playerctl", "play-pause", NULL };
 static const char *pctln[] = { "playerctl", "next", NULL };
 static const char *pctlp[] = { "playerctl", "previous", NULL };
-static const char *mountcmd[] = { "/home/john/.customsh/dmenumount.sh", NULL };
-static const char *umountcmd[] = { "/home/john/.customsh/dmenuumount.sh", NULL };
-static const char *gitpass[] = { "/home/john/.customsh/gitpass.sh", NULL };
+static const char *mountcmd[] = { "dmenumount.sh", NULL };
+static const char *umountcmd[] = { "dmenuumount.sh", NULL };
+static const char *gitpass[] = { "gitpass.sh", NULL };
 
 static Key keys[] = {
     /* modifier                        key             function        argument */
