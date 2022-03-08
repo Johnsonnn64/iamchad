@@ -119,7 +119,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *term[]  = {  "st", NULL }; // change this to your term
+static const char *term[]  = {  "st", "zsh",  NULL }; // change this to your term
 static const char *sscmd[] = { "scrot", "-F", "screenshot.png", "-o", "-s", "-f", "-e", "mv screenshot.png ~/pictures/ && xclip -selection clipboard -target image/png -i ~/pictures/screenshot.png", NULL};
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "12", "-x", "650", "-y", "400", "-z", "620", NULL };
@@ -189,7 +189,6 @@ static Key keys[] = {
 
     { MODKEY,                          XK_w,           killclient,     {0 } },
     { MODKEY,                          XK_t,           setlayout,      {.v = &layouts[0] } },
-    { MODKEY,                          XK_s,           setlayout,      {.v = &layouts[2] } },
     { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[6] } },
     { MODKEY,                          XK_space,       setlayout,      {0 } },
     { MODKEY|ControlMask,		           XK_comma,       cyclelayout,    {.i = -1 } },

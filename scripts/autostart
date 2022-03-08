@@ -5,7 +5,6 @@ xrdb merge ~/.Xresources &
 feh --bg-fill ~/pictures/wallpaper/marine\ drunk.jpg &
 dunst &
 xautolock -time 30 -locker 'systemctl hibernate' -notify 60 -notifier "notify-send -u critical 'SYSTEM GOING TO SLEEP' 'in 60 seconds'" &
-fcitx5 &
 
 # run bar script and dwm ( do not remove this )
 ~/.config/iamchad/scripts/bar.sh &
