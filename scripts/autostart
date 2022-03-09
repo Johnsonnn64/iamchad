@@ -2,7 +2,7 @@
 
 picom --experimental-backends &
 xrdb merge ~/.config/x11/Xresources &
-feh --bg-fill ~/pictures/wallpaper/marine\ drunk.jpg &
+feh --bg-fill ~/personal/pictures/wallpaper/marine\ drunk.jpg &
 dunst &
 xautolock -time 30 -locker 'systemctl hibernate' -notify 60 -notifier "notify-send -u critical 'SYSTEM GOING TO SLEEP' 'in 60 seconds'" &
 
