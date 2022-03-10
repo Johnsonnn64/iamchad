@@ -120,7 +120,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *term[]  = {  "st", "zsh",  NULL }; // change this to your term
-static const char *sscmd[] = { "scrot", "-F", "screenshot.png", "-o", "-s", "-f", "-e", "mv screenshot.png ~/pictures/ && xclip -selection clipboard -target image/png -i ~/pictures/screenshot.png", NULL};
+static const char *sscmd[] = { "scrot", "-F", "screenshot.png", "-o", "-s", "-f", "-e", "mv screenshot.png ~/personal/pictures/ && xclip -selection clipboard -target image/png -i ~/personal/pictures/screenshot.png", NULL};
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "12", "-x", "650", "-y", "400", "-z", "620", NULL };
 static const char *qutebrowser[] = { "quteopen.sh", NULL };
