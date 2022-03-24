@@ -30,11 +30,16 @@ togglegaps(const Arg *arg)
 }
 
 void
+maxgaps(const Arg *arg)
+{
+	setgaps(15, 15, 15, 15);
+}
+
+void
 defaultgaps(const Arg *arg)
 {
 	setgaps(gappoh, gappov, gappih, gappiv);
 }
-
 void
 incrgaps(const Arg *arg)
 {

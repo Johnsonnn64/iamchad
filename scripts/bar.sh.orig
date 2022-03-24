@@ -12,8 +12,8 @@ interval=0
 cpu() {
 	cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
 
-	printf "^c$green^  󰞰"
-	printf "^c$green^ $cpu_val"
+	printf "^c$black^ ^b$green^ 󰞰"
+	printf "^c$green^ ^b$grey^ $cpu_val"
 }
 
 pkg_updates() {
@@ -39,14 +39,14 @@ pkg_updates() {
 # }
 
 mem() {
-	printf "^c$green^  󰆼"
-	printf "^c$green^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
+	printf "^c$black^ ^b$green^ 󰆼"
+	printf "^c$green^ ^b$grey^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 }
 
 wlan() {
 	case "$(cat /sys/class/net/enp37s0/operstate 2>/dev/null)" in
-	up) printf "^c$blue^  󰤨 ^d^%s" " ^c$blue^Connected" ;;
-	down) printf "^c$red^  󰤭 ^d^%s" " ^c$red^Disconnected" ;;
+	up) printf "^c$black^ ^b$blue^ 󰤨 ^d^%s" " ^c$blue^Connected" ;;
+	down) printf "^c$black^ ^b$red^ 󰤭 ^d^%s" " ^c$red^Disconnected" ;;
 	esac
 }
 
@@ -56,9 +56,9 @@ wlan() {
 # }
 
 clock() {
-	printf "^c$blue^  󱑆 "
-  printf "^c$blue^ $(date '+%a, %m-%d ')"
-	printf "^c$blue^ $(date '+%H:%M')  "
+	printf "^c$black^^b$darkblue^ 󱑆 "
+  printf "^c$blue^^b$grey^ $(date '+%a, %m-%d ')"
+	printf "^c$blue^^b$grey^ $(date '+%H:%M')  "
 }
 
 obake() {
@@ -72,8 +72,8 @@ obake=$(obake)
 
 while true; do
 
-	[ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && curwea=$(printf "^c$blue^  $(curl wttr.in/angeles?format="%C+%t")")
+	[ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && curwea=$(printf "^c$blue^ $(curl wttr.in/angeles?format="%C+%t")")
   interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$updates $curwea $(mem) $(wlan) $(clock) $obake"
+  sleep 1 && xsetroot -name "$updates $curwea $(cpu) $(mem) $(wlan) $(clock) $obake"
 done
