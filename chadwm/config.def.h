@@ -28,7 +28,7 @@ static const int scalepreview            = 4;
 static       int tag_preview             = 0;        /* 1 means enable, 0 is off */
 static const int colorfultag             = 1;        /* 0 means use SchemeSel for selected non vacant tag */
 
-static const char *fonts[]               = { "JetBrainsMono Nerd Font:style=Medium:size=10:antialias=true",
+static const char *fonts[]               = { "JetBrainsMono Nerd Font:style=Medium:size=9:antialias=true",
 /*static const char *fonts[]               = { "Iosevka:style=Medium:size=10:antialias=true", */
                                              "Material Design Icons-Regular:size=10:antialias=true", };
 
@@ -99,12 +99,10 @@ static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "󰊠",      tile },    /* first entry is default */
+    { "󰊠",        tile },    /* first entry is default */
     { "[M]",      monocle },
-    { "[@]",      spiral },
     { "H[]",      deck },
     { "TTT",      bstack },
-    { "---",      horizgrid },
     { "|M|",      centeredmaster },
     { ">M>",      centeredfloatingmaster },
     { "><>",      NULL },    /* no layout function means floating behavior */
@@ -127,8 +125,6 @@ static const char *sscmd[] = { "scrot", "-F", "screenshot.png", "-o", "-s", "-f"
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "12", "-x", "650", "-y", "400", "-z", "620", NULL };
 static const char *qutebrowser[] = { "quteopen.sh", NULL };
-static const char *pm[] = { "pmixer.sh", NULL };
-static const char *gt[] = { "gotop.sh", NULL };
 static const char *playpause[] = { "playerctl", "play-pause", NULL };
 static const char *pctln[] = { "playerctl", "next", NULL };
 static const char *pctlp[] = { "playerctl", "previous", NULL };
@@ -136,8 +132,8 @@ static const char *mountcmd[] = { "dmenumount.sh", NULL };
 static const char *umountcmd[] = { "dmenuumount.sh", NULL };
 static const char *gitpass[] = { "gitpass.sh", NULL };
 typedef struct {
-	const char *name;
-	const void *cmd;
+      const char *name;
+      const void *cmd;
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "lf", NULL };
@@ -145,19 +141,28 @@ const char *spcmd3[] = {"st", "-n", "spcalcu", "-g", "80x50", "-e", "bc", "-l", 
 const char *spcmd4[] = {"st", "-n", "spvolume", "-g", "115x20", "-e", "pulsemixer", NULL };
 const char *spcmd5[] = {"st", "-n", "spgotop", "-g", "115x28", "-e", "gotop", NULL };
 static Sp scratchpads[] = {
-	/* name          cmd  */
-	{"spterm",       spcmd1},
-	{"splf",         spcmd2},
-	{"spcalcu",      spcmd3},
-	{"spvolume",     spcmd4},
-	{"spgotop",      spcmd5},
+      /* name          cmd  */
+      {"spterm",       spcmd1},
+      {"splf",         spcmd2},
+      {"spcalcu",      spcmd3},
+      {"spvolume",     spcmd4},
+      {"spgotop",      spcmd5},
 };
 
 
 static Key keys[] = {
     /*test*/
+	  { MODKEY,                          XK_s,           moveresize,     {.v = "0x 25y 0w 0h" } },
+	  { MODKEY,                          XK_w,           moveresize,     {.v = "0x -25y 0w 0h" } },
+	  { MODKEY,                          XK_d,           moveresize,     {.v = "25x 0y 0w 0h" } },
+	  { MODKEY,                          XK_a,           moveresize,     {.v = "-25x 0y 0w 0h" } },
+	  { MODKEY|ShiftMask,                XK_s,           moveresize,     {.v = "0x 0y 0w 25h" } },
+	  { MODKEY|ShiftMask,                XK_w,           moveresize,     {.v = "0x 0y 0w -25h" } },
+	  { MODKEY|ShiftMask,                XK_d,           moveresize,     {.v = "0x 0y 25w 0h" } },
+	  { MODKEY|ShiftMask,                XK_a,           moveresize,     {.v = "0x 0y -25w 0h" } },
+
     /* modifier                        key             function        argument */
-    { MODKEY,                          XK_w,           killclient,     {0 } },
+    { MODKEY,                          XK_q,           killclient,     {0 } },
 
     { MODKEY,                          XK_r,           spawn,          {.v = term }},
     { MODKEY|ShiftMask,                XK_r,           quit,           {1 } },
@@ -178,7 +183,7 @@ static Key keys[] = {
     { MODKEY,                          XK_p,           spawn,          {.v = dmenucmd } },
     { MODKEY|ControlMask,              XK_p,           spawn,          {.v = gitpass } },
 
-    { MODKEY,                          XK_d,           defaultgaps,    {0 } },
+    { MODKEY|ShiftMask,                XK_d,           defaultgaps,    {0 } },
     { MODKEY|ShiftMask|ControlMask,    XK_d,           maxgaps,        {0 } },
 
     { MODKEY,                          XK_f,           togglefullscr,  {0 } },
