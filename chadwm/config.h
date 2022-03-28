@@ -28,7 +28,7 @@ static const int scalepreview            = 4;
 static       int tag_preview             = 0;        /* 1 means enable, 0 is off */
 static const int colorfultag             = 1;        /* 0 means use SchemeSel for selected non vacant tag */
 
-static const char *fonts[]               = { "JetBrainsMono Nerd Font:style=Medium:size=9:antialias=true",
+static const char *fonts[]               = { "JetBrainsMono Nerd Font:style=Medium:size=10:antialias=true",
 /*static const char *fonts[]               = { "Iosevka:style=Medium:size=10:antialias=true", */
                                              "Material Design Icons-Regular:size=10:antialias=true", };
 
@@ -82,9 +82,9 @@ static const Rule rules[] = {
     { "YouTube Music",  NULL,       NULL,       1 << 5,       1,           0,            1 },
     { NULL,		          "spterm",		NULL,		    SPTAG(0),		  1,           1,			      -1 },
   	{ NULL,		          "spfm",	  	NULL,		    SPTAG(1),		  1,           1,			      -1 },
-  	{ NULL,		          "scalcu",   NULL,		    SPTAG(2),		  1,           1,			      -1 },
-  	{ NULL,		          "svolume",  NULL,		    SPTAG(3),		  1,           1,			      -1 },
-  	{ NULL,		          "sgotop",   NULL,		    SPTAG(4),		  1,           1,			      -1 },
+  	{ NULL,		          "spcalcu",   NULL,		    SPTAG(2),		  1,           1,			      -1 },
+  	{ NULL,		          "spvolume",  NULL,		    SPTAG(3),		  1,           1,			      -1 },
+  	{ NULL,		          "spgotop",   NULL,		    SPTAG(4),		  1,           1,			      -1 },
 };
 
 /* layout(s) */
@@ -140,33 +140,24 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "ranger", NULL };
-const char *spcmd3[] = {"st", "-n", "scalcu", "-g", "80x50", "-e", "bc", "-l", NULL };
-const char *spcmd4[] = {"st", "-n", "svolume", "-g", "115x20", "-e", "pulsemixer", NULL };
-const char *spcmd5[] = {"st", "-n", "sgotop", "-g", "115x28", "-e", "gotop", NULL };
+const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "lf", NULL };
+const char *spcmd3[] = {"st", "-n", "spcalcu", "-g", "80x50", "-e", "bc", "-l", NULL };
+const char *spcmd4[] = {"st", "-n", "spvolume", "-g", "115x20", "-e", "pulsemixer", NULL };
+const char *spcmd5[] = {"st", "-n", "spgotop", "-g", "115x28", "-e", "gotop", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
-	{"spterm",      spcmd1},
-	{"spranger",    spcmd2},
-	{"scalcu",      spcmd3},
-	{"svolume",     spcmd4},
-	{"sgotop",      spcmd5},
+	{"spterm",       spcmd1},
+	{"splf",         spcmd2},
+	{"spcalcu",      spcmd3},
+	{"spvolume",     spcmd4},
+	{"spgotop",      spcmd5},
 };
 
 
 static Key keys[] = {
     /*test*/
-    { MODKEY, XK_x, togglescratch, {.ui = 0} },
-    { MODKEY, XK_n, togglescratch, {.ui = 1} },
-    { MODKEY|ShiftMask, XK_x, togglescratch, {.ui = 2} },
-
     /* modifier                        key             function        argument */
-    { MODKEY|ControlMask,              XK_q,           quit,           {0 } },
-
     { MODKEY,                          XK_w,           killclient,     {0 } },
-
-    { MODKEY,                          XK_e,           hidewin,        {0 } },
-    { MODKEY|ShiftMask,                XK_e,           restorewin,     {0 } },
 
     { MODKEY,                          XK_r,           spawn,          {.v = term }},
     { MODKEY|ShiftMask,                XK_r,           quit,           {1 } },
@@ -177,9 +168,9 @@ static Key keys[] = {
     { MODKEY,                          XK_y,           incrigaps,      {.i = +5 } },
     { MODKEY|ShiftMask,                XK_y,           incrigaps,      {.i = -5 } },
 
-    { MODKEY,                          XK_u,           incrgaps,       {.i = -5 } },
+    { MODKEY,                          XK_u,           incrgaps,       {.i = +5 } },
 
-    { MODKEY,                          XK_i,           incrgaps,       {.i = +5 } },
+    { MODKEY,                          XK_i,           incrgaps,       {.i = -5 } },
 
     { MODKEY,                          XK_o,           incrogaps,      {.i = +5 } },
     { MODKEY|ShiftMask,                XK_o,           incrogaps,      {.i = -5 } },
@@ -187,7 +178,7 @@ static Key keys[] = {
     { MODKEY,                          XK_p,           spawn,          {.v = dmenucmd } },
     { MODKEY|ControlMask,              XK_p,           spawn,          {.v = gitpass } },
 
-    { MODKEY|ShiftMask,                XK_d,           defaultgaps,    {0 } },
+    { MODKEY,                          XK_d,           defaultgaps,    {0 } },
     { MODKEY|ShiftMask|ControlMask,    XK_d,           maxgaps,        {0 } },
 
     { MODKEY,                          XK_f,           togglefullscr,  {0 } },
@@ -211,7 +202,8 @@ static Key keys[] = {
     { MODKEY,                          XK_apostrophe,  focusmon,       {.i = +1 } },
     { MODKEY|ShiftMask,                XK_apostrophe,  tagmon,         {.i = +1 } },
 
-    { MODKEY,                          XK_c,           incnmaster,     {.i = -1 } },
+    { MODKEY,                          XK_z,           hidewin,        {0 } },
+    { MODKEY|ShiftMask,                XK_z,           restorewin,     {0 } },
 
     { MODKEY|ControlMask,              XK_v,           togglescratch,  {.ui = 3} },
 
@@ -219,6 +211,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,                XK_b,           spawn,          {.v = qutebrowser } },
 
     { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[6] } },
+
+    { MODKEY,                          XK_n,           togglescratch,  {.ui = 1} },
 
     { MODKEY|ControlMask,		           XK_comma,       cyclelayout,    {.i = -1 } },
     { MODKEY|ControlMask,              XK_period,      cyclelayout,    {.i = +1 } },
