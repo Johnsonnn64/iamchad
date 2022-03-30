@@ -280,9 +280,6 @@ static void motionnotify(XEvent *e);
 static void moveresize(const Arg *arg);
 static void movemouse(const Arg *arg);
 static void moveorplace(const Arg *arg);
-static void tagnextmon(const Arg *arg);
-static void tagprevmon(const Arg *arg);
-static void tagothermon(const Arg *arg, int dir);
 static Client *nexttiled(Client *c);
 static void placemouse(const Arg *arg);
 static void pop(Client *);
@@ -1731,36 +1728,6 @@ void focusstack(const Arg *arg) {
     restack(selmon);
     XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w/2, c->h/2);
   }
-}
-
-void
-tagnextmon(const Arg *arg)
-{
-	tagothermon(arg, 1);
-}
-
-void
-tagprevmon(const Arg *arg)
-{
-	tagothermon(arg, -1);
-}
-
-void
-tagothermon(const Arg *arg, int dir)
-{
-	Client *sel;
-	Monitor *newmon;
-
-	if (!selmon->sel || !mons->next)
-		return;
-	sel = selmon->sel;
-	newmon = dirtomon(dir);
-	sendmon(sel, newmon);
-	if (arg->ui & TAGMASK) {
-		sel->tags = arg->ui & TAGMASK;
-		focus(NULL);
-		arrange(newmon);
-	}
 }
 
 void

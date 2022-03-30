@@ -75,13 +75,15 @@ static const Rule rules[] = {
     /*xprop(1):
     WM_CLASS(STRING) = instance, class
     WM_NAME(STRING) = title*/
-    /* class            instance    title       tags mask     iscentered   isfloating   monitor */
-    { "XTerm",          NULL,       NULL,       0,            0,           1,           -1 },
-    { "discord",        NULL,       NULL,       1 << 5,       0,           0,            0 },
-    { "zoom",           NULL,       NULL,       1 << 6,       1,           1,           -1 },
-    { "YouTube Music",  NULL,       NULL,       1 << 5,       1,           0,            1 },
-    { NULL,		          "spterm",		NULL,		    SPTAG(0),		  1,           1,			      -1 },
-  	{ NULL,		          "spfm",	  	NULL,		    SPTAG(1),		  1,           1,			      -1 },
+    /* class            instance    title         tags mask     iscentered   isfloating   monitor */
+    { "discord",        NULL,        NULL,        1 << 5,       0,           0,            0 },
+    { "YouTube Music",  NULL,        NULL,        1 << 5,       1,           0,            1 },
+    { "XTerm",          NULL,        NULL,        0,            0,           1,           -1 },
+    { "zoom",           NULL,        NULL,        1 << 6,       1,           1,           -1 },
+    { NULL,             "flcen",     NULL,        0,            1,           1,           -1 },
+    { NULL,             "fl",        NULL,        0,            0,           1,           -1 },
+    { NULL,		          "spterm",	 	 NULL,		    SPTAG(0),		  1,           1,			      -1 },
+  	{ NULL,		          "spfm",	   	 NULL,		    SPTAG(1),		  1,           1,			      -1 },
   	{ NULL,		          "spcalcu",   NULL,		    SPTAG(2),		  1,           1,			      -1 },
   	{ NULL,		          "spvolume",  NULL,		    SPTAG(3),		  1,           1,			      -1 },
   	{ NULL,		          "spgotop",   NULL,		    SPTAG(4),		  1,           1,			      -1 },
@@ -114,7 +116,9 @@ static const Layout layouts[] = {
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} }, \
+	{ MODKEY|Mod4Mask,              KEY,      tagnextmon,     {.ui = 1 << TAG} }, \
+	{ MODKEY|Mod4Mask|ShiftMask,    KEY,      tagprevmon,     {.ui = 1 << TAG} },
 
 /*helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -139,14 +143,14 @@ const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "lf", NULL };
 const char *spcmd3[] = {"st", "-n", "spcalcu", "-g", "80x50", "-e", "bc", "-lq", NULL };
 const char *spcmd4[] = {"st", "-n", "spvolume", "-g", "115x20", "-e", "pulsemixer", NULL };
-const char *spcmd5[] = {"st", "-n", "spgotop", "-g", "115x28", "-e", "gotop", NULL };
+const char *spcmd5[] = {"st", "-n", "spgotop", "-g", "115x29", "-e", "gotop", NULL };
 static Sp scratchpads[] = {
-      /* name          cmd  */
-      {"spterm",       spcmd1},
-      {"splf",         spcmd2},
-      {"spcalcu",      spcmd3},
-      {"spvolume",     spcmd4},
-      {"spgotop",      spcmd5},
+    /* name          cmd  */
+    {"spterm",       spcmd1},
+    {"splf",         spcmd2},
+    {"spcalcu",      spcmd3},
+    {"spvolume",     spcmd4},
+    {"spgotop",      spcmd5},
 };
 
 
@@ -181,7 +185,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,                XK_o,           incrogaps,      {.i = -5 } },
 
     { MODKEY,                          XK_p,           spawn,          {.v = dmenucmd } },
-    { MODKEY|ControlMask,              XK_p,           spawn,          {.v = gitpass } },
+    { MODKEY|ControlMask,              XK_p,           spawn,          SHCMD("gitpass.sh") },
 
     { MODKEY|ControlMask|ShiftMask,    XK_d,           defaultgaps,    {0 } },
 
@@ -212,7 +216,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,              XK_v,           togglescratch,  {.ui = 3} },
 
     { MODKEY,                          XK_b,           togglebar,      {0} },
-    { MODKEY|ShiftMask,                XK_b,           spawn,          {.v = qutebrowser } },
+    { MODKEY|ShiftMask,                XK_b,           spawn,          SHCMD("quteopen") },
 
     { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[4] } },
 
@@ -235,12 +239,12 @@ static Key keys[] = {
     { MODKEY|ShiftMask,                XK_equal, 	     setborderpx,    {.i = +1 } },
     { MODKEY|ShiftMask|ControlMask,    XK_equal,       incnmaster,     {.i = +1 } },
 
-    { MODKEY,                          XK_F7,          spawn,          {.v = umountcmd } },
-    { MODKEY,                          XK_F8,          spawn,          {.v = mountcmd } },
+    { MODKEY,                          XK_F7,          spawn,          SHCMD("dmenuumount.sh") },
+    { MODKEY,                          XK_F8,          spawn,          SHCMD("dmenumount.sh") },
     { MODKEY,                          XK_F9,          togglescratch,  {.ui = 2 } },
-    { MODKEY,                          XK_F10,         spawn,          {.v = playpause } },
-    { MODKEY,                          XK_F11,         spawn,          {.v = pctlp } },
-    { MODKEY,                          XK_F12,         spawn,          {.v = pctln } },
+    { MODKEY,                          XK_F10,         spawn,          SHCMD("playerctl play-pause") },
+    { MODKEY,                          XK_F11,         spawn,          SHCMD("playerctl next") },
+    { MODKEY,                          XK_F12,         spawn,          SHCMD("playerctl previous") },
 
     { 0,                               XK_Print,       spawn,          {.v = sscmd } },
 
