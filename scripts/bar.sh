@@ -48,8 +48,8 @@ wlan() {
 	up) printf "^c$blue^  󰤨 ^d^%s" " ^c$blue^Connected" ;;
 	down) printf "^c$red^  󰤭 ^d^%s" " ^c$red^Disconnected" ;;
 	esac
-}
 
+}
 # cal() {
 #   printf "^c$black^ ^b$darkblue^ 󰸗 "
 #   printf "^c$blue^^b$grey^ $(date '+%a, %m-%d') "
@@ -62,7 +62,6 @@ clock() {
 }
 
 obake() {
-  printf "^b$black^"
   printf "^c$red^ 󰊠 "
   printf "^c$yellow^ 󰊠 "
   printf "^c$blue^ 󰊠 "
@@ -70,10 +69,18 @@ obake() {
 }
 obake=$(obake)
 
+weat() {
+	weatreport=~/.cache/wttr
+	curl -sf "wttr.in/angeles" > $weatreport
+	wstatus=$(sed '3q;d' $weatreport | grep -o "\[0m .*" | sed 's/\[0m //g')
+	degree=$(sed '4q;d' $weatreport | grep -o "m\\([-+]\\)*[0-9]\\+" | tr '\n|m' ' ' | awk '{print $1,"°(",$2,"°)"}' | sed 's/ //g')
+	printf "^c$blue^ $wstatus $degree"
+}
+
 while true; do
 
-	[ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && curwea=$(printf "^c$blue^  $(curl wttr.in/angeles?format="%C+%t")")
+	[ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && curwea=$(weat)
   interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$updates $curwea $(mem) $(wlan) $(clock) $obake"
+  sleep 1 && xsetroot -name "$updates $curwea$(mem) $(wlan) $(clock) $obake"
 done
