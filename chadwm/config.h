@@ -6,8 +6,8 @@ static const unsigned int snap           = 32;       /* snap pixel */
 static const unsigned int gappih         = 60;       /* horiz inner gap between windows */
 static const unsigned int gappiv         = 60;       /* vert inner gap between windows */
 static const unsigned int gappoh         = 60;       /* horiz outer gap between windows and screen edge */
-static       int smartgaps               = 0;        /* 1 means no outer gap when there is only one window */
 static const unsigned int gappov         = 60;       /* vert outer gap between windows and screen edge */
+static       int smartgaps               = 0;        /* 1 means no outer gap when there is only one window */
 static const unsigned int systraypinning = 0;        /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;        /* systray spacing */
 static const int systraypinningfailfirst = 1;        /* 1: if pinning fails,display systray on the 1st monitor,False: display systray on last monitor*/
@@ -137,7 +137,7 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "lf", NULL };
-const char *spcmd3[] = {"st", "-n", "spcalcu", "-g", "80x50", "-e", "bc", "-l", NULL };
+const char *spcmd3[] = {"st", "-n", "spcalcu", "-g", "80x50", "-e", "bc", "-lq", NULL };
 const char *spcmd4[] = {"st", "-n", "spvolume", "-g", "115x20", "-e", "pulsemixer", NULL };
 const char *spcmd5[] = {"st", "-n", "spgotop", "-g", "115x28", "-e", "gotop", NULL };
 static Sp scratchpads[] = {
@@ -183,8 +183,7 @@ static Key keys[] = {
     { MODKEY,                          XK_p,           spawn,          {.v = dmenucmd } },
     { MODKEY|ControlMask,              XK_p,           spawn,          {.v = gitpass } },
 
-    { MODKEY|ShiftMask,                XK_d,           defaultgaps,    {0 } },
-    { MODKEY|ShiftMask|ControlMask,    XK_d,           maxgaps,        {0 } },
+    { MODKEY|ControlMask|ShiftMask,    XK_d,           defaultgaps,    {0 } },
 
     { MODKEY,                          XK_f,           togglefullscr,  {0 } },
 
@@ -215,7 +214,7 @@ static Key keys[] = {
     { MODKEY,                          XK_b,           togglebar,      {0} },
     { MODKEY|ShiftMask,                XK_b,           spawn,          {.v = qutebrowser } },
 
-    { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[6] } },
+    { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[4] } },
 
     { MODKEY,                          XK_n,           togglescratch,  {.ui = 1} },
 
