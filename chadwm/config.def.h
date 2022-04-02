@@ -77,16 +77,17 @@ static const Rule rules[] = {
     WM_NAME(STRING) = title*/
     /* class            instance    title         tags mask     iscentered   isfloating   monitor */
     { "discord",        NULL,        NULL,        1 << 5,       0,           0,            0 },
-    { "YouTube Music",  NULL,        NULL,        1 << 5,       1,           0,            1 },
+    { "YouTube Music",  NULL,        NULL,        1 << 5,       0,           0,            1 },
     { "XTerm",          NULL,        NULL,        0,            0,           1,           -1 },
     { "zoom",           NULL,        NULL,        1 << 6,       1,           1,           -1 },
-    { NULL,             "flcen",     NULL,        0,            1,           1,           -1 },
+    { NULL,             "fcen",      NULL,        0,            1,           1,           -1 },
     { NULL,             "fl",        NULL,        0,            0,           1,           -1 },
     { NULL,		          "spterm",	 	 NULL,		    SPTAG(0),		  1,           1,			      -1 },
   	{ NULL,		          "spfm",	   	 NULL,		    SPTAG(1),		  1,           1,			      -1 },
   	{ NULL,		          "spcalcu",   NULL,		    SPTAG(2),		  1,           1,			      -1 },
   	{ NULL,		          "spvolume",  NULL,		    SPTAG(3),		  1,           1,			      -1 },
   	{ NULL,		          "spgotop",   NULL,		    SPTAG(4),		  1,           1,			      -1 },
+  	{ NULL,		          "spcurse",   NULL,		    SPTAG(5),		  0,           1,			      -1 },
 };
 
 /* layout(s) */
@@ -112,6 +113,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod1Mask
+#define FULMODKEY Mod1Mask|ShiftMask|ControlMask|Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -133,10 +135,11 @@ typedef struct {
       const void *cmd;
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "lf", NULL };
+const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "lfrun", NULL };
 const char *spcmd3[] = {"st", "-n", "spcalcu", "-g", "80x50", "-e", "bc", "-lq", NULL };
 const char *spcmd4[] = {"st", "-n", "spvolume", "-g", "115x20", "-e", "pulsemixer", NULL };
 const char *spcmd5[] = {"st", "-n", "spgotop", "-g", "115x29", "-e", "gotop", NULL };
+const char *spcmd6[] = {"st", "-n", "spcurse", "-g", "100x30+1200+5", "-e", "calcurse", NULL };
 static Sp scratchpads[] = {
     /* name          cmd  */
     {"spterm",       spcmd1},
@@ -144,19 +147,28 @@ static Sp scratchpads[] = {
     {"spcalcu",      spcmd3},
     {"spvolume",     spcmd4},
     {"spgotop",      spcmd5},
+    {"spcurse",      spcmd6},
 };
 
 
 static Key keys[] = {
     /*test*/
-	  { MODKEY,                          XK_s,           moveresize,     {.v = "0x 25y 0w 0h" } },
+    { MODKEY|ShiftMask|ControlMask,    XK_j,           moveresize,     {.v = "0x 25y 0w 0h" } },
+	  { MODKEY|ShiftMask|ControlMask,    XK_k,           moveresize,     {.v = "0x -25y 0w 0h" } },
+	  { MODKEY|ShiftMask|ControlMask,    XK_l,           moveresize,     {.v = "25x 0y 0w 0h" } },
+	  { MODKEY|ShiftMask|ControlMask,    XK_h,           moveresize,     {.v = "-25x 0y 0w 0h" } },
+	  { FULMODKEY,                       XK_j,           moveresize,     {.v = "0x 0y 0w 25h" } },
+	  { FULMODKEY,                       XK_k,           moveresize,     {.v = "0x 0y 0w -25h" } },
+	  { FULMODKEY,                       XK_l,           moveresize,     {.v = "0x 0y 25w 0h" } },
+	  { FULMODKEY,                       XK_h,           moveresize,     {.v = "0x 0y -25w 0h" } },
+		/*{ MODKEY,                          XK_s,           moveresize,     {.v = "0x 25y 0w 0h" } },
 	  { MODKEY,                          XK_w,           moveresize,     {.v = "0x -25y 0w 0h" } },
 	  { MODKEY,                          XK_d,           moveresize,     {.v = "25x 0y 0w 0h" } },
 	  { MODKEY,                          XK_a,           moveresize,     {.v = "-25x 0y 0w 0h" } },
 	  { MODKEY|ShiftMask,                XK_s,           moveresize,     {.v = "0x 0y 0w 25h" } },
 	  { MODKEY|ShiftMask,                XK_w,           moveresize,     {.v = "0x 0y 0w -25h" } },
 	  { MODKEY|ShiftMask,                XK_d,           moveresize,     {.v = "0x 0y 25w 0h" } },
-	  { MODKEY|ShiftMask,                XK_a,           moveresize,     {.v = "0x 0y -25w 0h" } },
+		{ MODKEY|ShiftMask,                XK_a,           moveresize,     {.v = "0x 0y -25w 0h" } },*/
 
     /* modifier                        key             function        argument */
     { MODKEY,                          XK_q,           killclient,     {0 } },
@@ -203,13 +215,16 @@ static Key keys[] = {
     { MODKEY,                          XK_apostrophe,  focusmon,       {.i = +1 } },
     { MODKEY|ShiftMask,                XK_apostrophe,  tagmon,         {.i = +1 } },
 
+
     { MODKEY,                          XK_z,           hidewin,        {0 } },
     { MODKEY|ShiftMask,                XK_z,           restorewin,     {0 } },
+
+    { MODKEY|ControlMask,              XK_c,           togglescratch,  {.ui = 5} },
 
     { MODKEY|ControlMask,              XK_v,           togglescratch,  {.ui = 3} },
 
     { MODKEY,                          XK_b,           togglebar,      {0} },
-    { MODKEY|ShiftMask,                XK_b,           spawn,          SHCMD("quteopen") },
+    { MODKEY|ShiftMask,                XK_b,           spawn,          SHCMD("quteopen.sh") },
 
     { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[4] } },
 
@@ -236,8 +251,8 @@ static Key keys[] = {
     { MODKEY,                          XK_F8,          spawn,          SHCMD("dmenumount.sh") },
     { MODKEY,                          XK_F9,          togglescratch,  {.ui = 2 } },
     { MODKEY,                          XK_F10,         spawn,          SHCMD("playerctl play-pause") },
-    { MODKEY,                          XK_F11,         spawn,          SHCMD("playerctl next") },
-    { MODKEY,                          XK_F12,         spawn,          SHCMD("playerctl previous") },
+    { MODKEY,                          XK_F11,         spawn,          SHCMD("playerctl previous") },
+    { MODKEY,                          XK_F12,         spawn,          SHCMD("playerctl next") },
 
     { 0,                               XK_Print,       spawn,          {.v = sscmd } },
 

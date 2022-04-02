@@ -325,7 +325,7 @@ static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void switchtag(void);
 static Monitor *systraytomon(Monitor *m);
-static void tabmode(const Arg *arg);
+/*static void tabmode(const Arg *arg);*/
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglebar(const Arg *arg);
@@ -3124,7 +3124,7 @@ void switchtag(void) {
 	}
 }
 
-void
+/*void
 tabmode(const Arg *arg)
 {
 	if(arg && arg->i >= 0)
@@ -3132,7 +3132,7 @@ tabmode(const Arg *arg)
 	else
 		selmon->showtab = (selmon->showtab + 1 ) % showtab_nmodes;
 	arrange(selmon);
-}
+}*/
 
 void tag(const Arg *arg) {
   if (selmon->sel && arg->ui & TAGMASK) {
