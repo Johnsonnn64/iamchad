@@ -20,7 +20,7 @@ static const int topbar                  = 1;        /* 0 means bottom bar */
 static const int vertpad                 = 0;        /* statusbar verical padding */
 static const int sidepad                 = 15;       /* statusbar side padding */
 static const int horizpadbar             = 25;
-static const int vertpadbar              = 14;
+static const int vertpadbar              = 10;
 static const int vertpadtab              = 42;
 static const int horizpadtabi            = 15;
 static const int horizpadtabo            = 15;
@@ -129,7 +129,7 @@ static const Layout layouts[] = {
 static const char *term[]  = {  "st", NULL }; // change this to your term
 static const char *sscmd[] = { "scrot", "-F", "screenshot.png", "-o", "-s", "-f", "-e", "mv screenshot.png ~/personal/pictures/ && xclip -selection clipboard -target image/png -i ~/personal/pictures/screenshot.png", NULL};
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-l", "12", "-x", "650", "-y", "400", "-z", "620", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, /*"-l", "12",*/ "-x", "15", "-z", "1890", NULL };
 typedef struct {
       const char *name;
       const void *cmd;
