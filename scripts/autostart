@@ -2,9 +2,7 @@
 
 picom --experimental-backends &
 xrdb merge ~/.config/x11/Xresources_catppuccin &
-feh --no-fehbg --bg-fill ~/personal/pictures/wall.png
-dunst &
-xautolock -time 30 -locker 'systemctl hibernate' -notify 10 -notifier "notify-send -u critical 'Welcome Back!' 'You've been away for'" &
+feh --no-fehbg --bg-fill ~/personal/pictures/wall.png &
 
 # run bar script and dwm ( do not remove this )
 ~/.config/iamchad/scripts/bar.sh &

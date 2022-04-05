@@ -76,12 +76,11 @@ static const Rule rules[] = {
     WM_CLASS(STRING) = instance, class
     WM_NAME(STRING) = title*/
     /* class            instance    title         tags mask     iscentered   isfloating   monitor */
-    { "discord",        NULL,        NULL,        1 << 5,       0,           0,            0 },
-    { "YouTube Music",  NULL,        NULL,        1 << 5,       0,           0,            1 },
-    { "XTerm",          NULL,        NULL,        0,            0,           1,           -1 },
     { "zoom",           NULL,        NULL,        1 << 6,       1,           1,           -1 },
+    { "youtube-music-desktop-app",  NULL,        NULL,        1 << 5,       0,           0,            1 },
     { NULL,             "fcen",      NULL,        0,            1,           1,           -1 },
     { NULL,             "fl",        NULL,        0,            0,           1,           -1 },
+    /* scratchpads*/
     { NULL,		          "spterm",	 	 NULL,		    SPTAG(0),		  1,           1,			      -1 },
   	{ NULL,		          "spfm",	   	 NULL,		    SPTAG(1),		  1,           1,			      -1 },
   	{ NULL,		          "spcalcu",   NULL,		    SPTAG(2),		  1,           1,			      -1 },
@@ -153,22 +152,6 @@ static Sp scratchpads[] = {
 
 static Key keys[] = {
     /*test*/
-    { MODKEY|ShiftMask|ControlMask,    XK_j,           moveresize,     {.v = "0x 25y 0w 0h" } },
-	  { MODKEY|ShiftMask|ControlMask,    XK_k,           moveresize,     {.v = "0x -25y 0w 0h" } },
-	  { MODKEY|ShiftMask|ControlMask,    XK_l,           moveresize,     {.v = "25x 0y 0w 0h" } },
-	  { MODKEY|ShiftMask|ControlMask,    XK_h,           moveresize,     {.v = "-25x 0y 0w 0h" } },
-	  { FULMODKEY,                       XK_j,           moveresize,     {.v = "0x 0y 0w 25h" } },
-	  { FULMODKEY,                       XK_k,           moveresize,     {.v = "0x 0y 0w -25h" } },
-	  { FULMODKEY,                       XK_l,           moveresize,     {.v = "0x 0y 25w 0h" } },
-	  { FULMODKEY,                       XK_h,           moveresize,     {.v = "0x 0y -25w 0h" } },
-		/*{ MODKEY,                          XK_s,           moveresize,     {.v = "0x 25y 0w 0h" } },
-	  { MODKEY,                          XK_w,           moveresize,     {.v = "0x -25y 0w 0h" } },
-	  { MODKEY,                          XK_d,           moveresize,     {.v = "25x 0y 0w 0h" } },
-	  { MODKEY,                          XK_a,           moveresize,     {.v = "-25x 0y 0w 0h" } },
-	  { MODKEY|ShiftMask,                XK_s,           moveresize,     {.v = "0x 0y 0w 25h" } },
-	  { MODKEY|ShiftMask,                XK_w,           moveresize,     {.v = "0x 0y 0w -25h" } },
-	  { MODKEY|ShiftMask,                XK_d,           moveresize,     {.v = "0x 0y 25w 0h" } },
-		{ MODKEY|ShiftMask,                XK_a,           moveresize,     {.v = "0x 0y -25w 0h" } },*/
 
     /* modifier                        key             function        argument */
     { MODKEY,                          XK_q,           killclient,     {0 } },
@@ -200,21 +183,29 @@ static Key keys[] = {
 
     { MODKEY,                          XK_h,           setmfact,       {.f = -0.025 } },
     { MODKEY|ShiftMask,                XK_h,           setcfact,       {.f = -0.25 } },
+    { MODKEY|ShiftMask|ControlMask,    XK_h,           moveresize,     {.v = "-25x 0y 0w 0h" } },
+    { FULMODKEY,                       XK_h,           moveresize,     {.v = "0x 0y -25w 0h" } },
 
     { MODKEY,                          XK_j,           focusstack,     {.i = +1 } },
     { MODKEY|ShiftMask,                XK_j,           movestack,      {.i = +1 } },
+    { MODKEY|ShiftMask|ControlMask,    XK_j,           moveresize,     {.v = "0x 25y 0w 0h" } },
+    { FULMODKEY,                       XK_j,           moveresize,     {.v = "0x 0y 0w 25h" } },
 
     { MODKEY,                          XK_k,           focusstack,     {.i = -1 } },
     { MODKEY|ShiftMask,                XK_k,           movestack,      {.i = -1 } },
+    { MODKEY|ShiftMask|ControlMask,    XK_k,           moveresize,     {.v = "0x -25y 0w 0h" } },
+    { FULMODKEY,                       XK_k,           moveresize,     {.v = "0x 0y 0w -25h" } },
 
     { MODKEY,                          XK_l,           setmfact,       {.f = +0.025 } },
     { MODKEY|ShiftMask,                XK_l,           setcfact,       {.f = +0.25 } },
+    { MODKEY|ShiftMask|ControlMask,    XK_l,           moveresize,     {.v = "25x 0y 0w 0h" } },
+    { FULMODKEY,                       XK_l,           moveresize,     {.v = "0x 0y 25w 0h" } },
 
     { MODKEY,                          XK_semicolon,   focusmon,       {.i = -1 } },
     { MODKEY|ShiftMask,                XK_semicolon,   tagmon,         {.i = -1 } },
+
     { MODKEY,                          XK_apostrophe,  focusmon,       {.i = +1 } },
     { MODKEY|ShiftMask,                XK_apostrophe,  tagmon,         {.i = +1 } },
-
 
     { MODKEY,                          XK_z,           hidewin,        {0 } },
     { MODKEY|ShiftMask,                XK_z,           restorewin,     {0 } },
@@ -224,7 +215,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,              XK_v,           togglescratch,  {.ui = 3} },
 
     { MODKEY,                          XK_b,           togglebar,      {0} },
-    { MODKEY|ShiftMask,                XK_b,           spawn,          SHCMD("quteopen.sh") },
+    { MODKEY|ShiftMask,                XK_b,           spawn,          SHCMD("qute.sh") },
 
     { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[4] } },
 

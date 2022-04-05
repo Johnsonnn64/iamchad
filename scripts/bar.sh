@@ -39,7 +39,7 @@ pkg_updates() {
 # }
 
 mem() {
-	printf "^c$green^  󰆼"
+	printf "^c$green^󰆼"
 	printf "^c$green^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 }
 
@@ -48,15 +48,15 @@ wlan() {
 	up) printf "^c$blue^  󰤨 ^d^%s" " ^c$blue^Connected" ;;
 	down) printf "^c$red^  󰤭 ^d^%s" " ^c$red^Disconnected" ;;
 	esac
-
 }
+
 # cal() {
 #   printf "^c$black^ ^b$darkblue^ 󰸗 "
 #   printf "^c$blue^^b$grey^ $(date '+%a, %m-%d') "
 # }
 
 clock() {
-	printf "^c$blue^  󱑆 "
+	printf "^c$blue^󱑆"
   printf "^c$blue^ $(date '+%a, %m-%d ')"
 	printf "^c$blue^ $(date '+%H:%M')  "
 }
@@ -65,14 +65,14 @@ obake() {
   printf "^c$red^ 󰊠 "
   printf "^c$yellow^ 󰊠 "
   printf "^c$blue^ 󰊠 "
-  printf "^c$purple^ 󰊠 "
+  printf "^c$purple^ 󰊠"
 }
 obake=$(obake)
 
 weat() {
+	curl -sf "wttr.in/angeles" > ~/.cache/wttr
 	weatreport=~/.cache/wttr
-	curl -sf "wttr.in/angeles" > $weatreport
-	wstatus=$(sed '3q;d' $weatreport | grep -o "\[0m .*" | sed 's/\[0m //g')
+	wstatus=$(sed '3q;d' $weatreport | sed 's/   *//g' )
 	degree=$(sed '4q;d' $weatreport | grep -o "m\\([-+]\\)*[0-9]\\+" | tr '\n|m' ' ' | awk '{print $1,"°(",$2,"°)"}' | sed 's/ //g')
 	printf "^c$blue^ $wstatus $degree"
 }
@@ -80,7 +80,7 @@ weat() {
 while true; do
 
 	[ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && curwea=$(weat)
-  interval=$((interval + 1))
+	interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$updates $curwea$(mem) $(wlan) $(clock) $obake"
+	sleep 1 && xsetroot -name "$(echo "$updates  $curwea   $(mem)   $(wlan)   $(clock)   $obake" | sed 's/   */  /g' | sed 's/   */  /g')"
 done
