@@ -77,7 +77,7 @@ static const Rule rules[] = {
     WM_NAME(STRING) = title*/
     /* class            instance    title         tags mask     iscentered   isfloating   monitor */
     { "zoom",           NULL,        NULL,        1 << 6,       1,           1,           -1 },
-    { "youtube-music-desktop-app",  NULL,        NULL,        1 << 5,       0,           0,            1 },
+    { "YouTube Music",  NULL,        NULL,        1 << 5,       0,           0,            1 },
     { NULL,             "fcen",      NULL,        0,            1,           1,           -1 },
     { NULL,             "fl",        NULL,        0,            0,           1,           -1 },
     /* scratchpads*/

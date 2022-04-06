@@ -72,7 +72,7 @@ obake=$(obake)
 weat() {
 	curl -sf "wttr.in/angeles" > ~/.cache/wttr
 	weatreport=~/.cache/wttr
-	wstatus=$(sed '3q;d' $weatreport | sed 's/   *//g' )
+	wstatus=$(sed '3q;d' $weatreport | sed 's/^.*.0m  *//g' )
 	degree=$(sed '4q;d' $weatreport | grep -o "m\\([-+]\\)*[0-9]\\+" | tr '\n|m' ' ' | awk '{print $1,"°(",$2,"°)"}' | sed 's/ //g')
 	printf "^c$blue^ $wstatus $degree"
 }

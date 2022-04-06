@@ -1,5 +1,6 @@
 #!/bin/sh
 
+fcitx5 &
 picom --experimental-backends &
 xrdb merge ~/.config/x11/Xresources_catppuccin &
 feh --no-fehbg --bg-fill ~/personal/pictures/wall.png &
