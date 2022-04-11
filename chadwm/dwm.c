@@ -183,8 +183,7 @@ struct Client {
   int basew, baseh, incw, inch, maxw, maxh, minw, minh;
   int bw, oldbw;
   unsigned int tags;
-  int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate,
-      isfullscreen;
+  int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
 	int beingmoved;
   Client *next;
   Client *snext;
@@ -361,6 +360,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void movecenter(const Arg *arg);
 
 /* variables */
 static Systray *systray = NULL;
@@ -487,13 +487,12 @@ void applyrules(Client *c) {
       c->isfloating = r->isfloating;
       c->tags |= r->tags;
 
-			if ((r->tags & SPTAGMASK) && r->isfloating) {
-				c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
-				c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
-			}
+      if ((r->tags & SPTAGMASK) && r->iscentered) {
+        c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
+        c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
+      }
 
-      for (m = mons; m && m->num != r->monitor; m = m->next)
-        ;
+      for (m = mons; m && m->num != r->monitor; m = m->next) ;
       if (m)
         c->mon = m;
     }
@@ -3030,7 +3029,7 @@ void showhide(Client *c) {
   if (!c)
     return;
   if (ISVISIBLE(c)) {
-		if ((c->tags & SPTAGMASK) && c->isfloating) {
+		if ((c->tags & SPTAGMASK) && c->iscentered) {
 			c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
 			c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
 		}
@@ -3838,6 +3837,15 @@ void zoom(const Arg *arg) {
   pop(c);
 }
 
+void
+movecenter(const Arg *arg)
+{
+	selmon->sel->x = selmon->sel->mon->mx + (selmon->sel->mon->mw - WIDTH(selmon->sel)) / 2;
+	selmon->sel->y = selmon->sel->mon->my + (selmon->sel->mon->mh - HEIGHT(selmon->sel)) / 2;
+	arrange(selmon);
+}
+
+
 int main(int argc, char *argv[]) {
   if (argc == 2 && !strcmp("-v", argv[1]))
     die("dwm-" VERSION);
@@ -3866,3 +3874,4 @@ int main(int argc, char *argv[]) {
   XCloseDisplay(dpy);
   return EXIT_SUCCESS;
 }
+

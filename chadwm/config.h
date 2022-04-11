@@ -81,9 +81,9 @@ static const Rule rules[] = {
     { NULL,             "fcen",      NULL,        0,            1,           1,           -1 },
     { NULL,             "fl",        NULL,        0,            0,           1,           -1 },
     /* scratchpads*/
-    { NULL,		          "spterm",	 	 NULL,		    SPTAG(0),		  1,           1,			      -1 },
-  	{ NULL,		          "spfm",	   	 NULL,		    SPTAG(1),		  1,           1,			      -1 },
-  	{ NULL,		          "spcalcu",   NULL,		    SPTAG(2),		  1,           1,			      -1 },
+    { NULL,		          "spterm",	 	 NULL,		    SPTAG(0),		  0,           1,			      -1 },
+  	{ NULL,		          "spfm",	   	 NULL,		    SPTAG(1),		  0,           1,			      -1 },
+  	{ NULL,		          "spcalcu",   NULL,		    SPTAG(2),		  0,           1,			      -1 },
   	{ NULL,		          "spvolume",  NULL,		    SPTAG(3),		  1,           1,			      -1 },
   	{ NULL,		          "spgotop",   NULL,		    SPTAG(4),		  1,           1,			      -1 },
   	{ NULL,		          "spcurse",   NULL,		    SPTAG(5),		  0,           1,			      -1 },
@@ -135,7 +135,7 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "lfrun", NULL };
-const char *spcmd3[] = {"st", "-n", "spcalcu", "-g", "80x50", "-e", "bc", "-lq", NULL };
+const char *spcmd3[] = {"st", "-n", "spcalcu", "-g", "80x30", "-e", "bc", "-lq", NULL };
 const char *spcmd4[] = {"st", "-n", "spvolume", "-g", "115x20", "-e", "pulsemixer", NULL };
 const char *spcmd5[] = {"st", "-n", "spgotop", "-g", "115x29", "-e", "gotop", NULL };
 const char *spcmd6[] = {"st", "-n", "spcurse", "-g", "100x30+1200+5", "-e", "calcurse", NULL };
@@ -218,6 +218,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,                XK_b,           spawn,          SHCMD("qute.sh") },
 
     { MODKEY,                          XK_m,           setlayout,      {.v = &layouts[4] } },
+    { MODKEY|ShiftMask,                XK_m,           movecenter,     {0} },
 
     { MODKEY,                          XK_n,           togglescratch,  {.ui = 1} },
 
