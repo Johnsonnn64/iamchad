@@ -361,6 +361,7 @@ static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
 static void movecenter(const Arg *arg);
+static void focusmonx(const Arg *arg);
 
 /* variables */
 static Systray *systray = NULL;
@@ -1688,22 +1689,23 @@ void focusmon(const Arg *arg) {
   unfocus(selmon->sel, 0);
   selmon = m;
   focus(NULL);
+
   XWarpPointer(dpy, None, m->barwin, 0, 0, 0, 0, m->mw / 2, m->mh / 2);
 }
 
 
-/* static void */
-/* focusmon(const Arg *arg) */
-/* { */
-/* 	Monitor *m; */
-/* 	for (m = mons; m && m->num != arg->i; m = m->next); */
-/* 	if (m == selmon) */
-/* 		return; */
-/* 	unfocus(selmon->sel, 0); */
-/* 	XWarpPointer(dpy, None, m->barwin, 0, 0, 0, 0, m->mw / 2, m->mh / 2); */
-/* 	selmon = m; */
-/* 	focus(NULL); */
-/* } */
+ static void
+ focusmonx(const Arg *arg)
+ {
+   Monitor *m;
+   for (m = mons; m && m->num != arg->i; m = m->next);
+   if (m == selmon)
+     return;
+   unfocus(selmon->sel, 0);
+   XWarpPointer(dpy, None, m->barwin, 0, 0, 0, 0, m->mw / 2, m->mh / 2);
+   selmon = m;
+   focus(NULL);
+ }
 
 void focusstack(const Arg *arg) {
   Client *c = NULL, *i;
