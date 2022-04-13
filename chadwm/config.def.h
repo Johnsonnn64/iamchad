@@ -177,6 +177,7 @@ static Key keys[] = {
     { MODKEY|ControlMask|ShiftMask,    XK_d,           defaultgaps,    {0 } },
 
     { MODKEY,                          XK_f,           togglefullscr,  {0 } },
+    { MODKEY|ControlMask,              XK_f,           setlayout,      {.v = &layouts[6] } },
 
     { MODKEY,                          XK_g,           togglescratch,  { .ui = 4 } },
 

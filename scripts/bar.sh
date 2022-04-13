@@ -9,12 +9,12 @@ interval=0
 . ~/.config/iamchad/scripts/bar_themes/catppuccin
 
 
-cpu() {
-	cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
+#cpu() {
+	#cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
 
-	printf "^c$green^  󰞰"
-	printf "^c$green^ $cpu_val"
-}
+	#printf "^c$green^  󰞰"
+	#printf "^c$green^ $cpu_val"
+#}
 
 pkg_updates() {
 	# updates=$(sudo pacman -Sy  cl| wc -l) # void
