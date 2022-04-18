@@ -1,11 +1,13 @@
 #!/bin/sh
 
 picom --experimental-backends &
+pulseaudio &
 fcitx5 &
 clipmenud  &
+dunst &
 xrdb merge ~/.config/x11/Xresources_catppuccin &
-hsetroot -fill ~/personal/pictures/wall.png &
-xbanish -t 1 -s &
+feh --bg-fill --no-fehbg ~/personal/pictures/wall.png &
+xbanish -t 2 -s &
 # run bar script and dwm ( do not remove this )
 ~/.config/iamchad/scripts/bar.sh &
 dwm
