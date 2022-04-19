@@ -1,10 +1,10 @@
 #!/bin/sh
 
-picom --experimental-backends &
+# picom --experimental-backends &
 pulseaudio &
-fcitx5 &
-clipmenud  &
-dunst &
+# fcitx5 &
+# clipmenud  &
+# dunst &
 xrdb merge ~/.config/x11/Xresources_catppuccin &
 feh --bg-fill --no-fehbg ~/personal/pictures/wall.png &
 xbanish -t 2 -s &

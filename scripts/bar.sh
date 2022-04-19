@@ -28,15 +28,17 @@ pkg_updates() {
 	fi
 }
 
-# battery() {
-# 	get_capacity="$(cat /sys/class/power_supply/BAT1/capacity)"
-# 	printf "^c$blue^   $get_capacity"
-# }
+battery() {
+	get_capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
 
-# brightness() {
-# 	printf "^c$red^   "
-# 	printf "^c$red^%.0f\n" $(cat /sys/class/backlight/*/brightness)
-# }
+	printf "^c$blue^   $get_capacity"
+}
+
+brightness() {
+	printf "^c$red^   "
+  printf "^c$red^%.0f\n" $(i=$(cat /sys/class/backlight/*/brightness)
+  echo $i/2.55 | bc)
+}
 
 mem() {
 	printf "^c$green^󰆼"
@@ -44,16 +46,11 @@ mem() {
 }
 
 wlan() {
-	case "$(cat /sys/class/net/enp37s0/operstate 2>/dev/null)" in
+	case "$(cat /sys/class/net/wlan0/operstate 2>/dev/null)" in
 	up) printf "^c$blue^  󰤨 ^d^%s" " ^c$blue^Connected" ;;
 	down) printf "^c$red^  󰤭 ^d^%s" " ^c$red^Disconnected" ;;
 	esac
 }
-
-# cal() {
-#   printf "^c$black^ ^b$darkblue^ 󰸗 "
-#   printf "^c$blue^^b$grey^ $(date '+%a, %m-%d') "
-# }
 
 clock() {
 	printf "^c$blue^󱑆"
@@ -82,5 +79,5 @@ while true; do
 	[ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && curwea=$(weat)
 	interval=$((interval + 1))
 
-	sleep 1 && xsetroot -name "$(echo "$updates  $curwea   $(mem)   $(wlan)   $(clock)   $obake" | sed 's/   */  /g' | sed 's/   */  /g')"
+  sleep 1 && xsetroot -name "$(echo "$updates  $curwea  $(mem)  $(battery) $(brightness) $(wlan)  $(clock)   $obake" | sed 's/   */  /g' | sed 's/   */  /g')"
 done
