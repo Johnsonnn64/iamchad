@@ -30,14 +30,23 @@ pkg_updates() {
 
 battery() {
 	get_capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
+  ac_state="$(cat /sys/class/power_supply/AC/online)"
 
-	printf "^c$blue^   $get_capacity"
+  if [ "$ac_state" == 1 ]; then
+    printf "^c$green^   $get_capacity"
+  else
+    if [ "$get_capacity" -le 20 ]; then
+      printf "^c$red^   $get_capacity"
+    else
+      printf "^c$yellow^   $get_capacity"
+    fi
+  fi
 }
 
 brightness() {
 	printf "^c$red^   "
   printf "^c$red^%.0f\n" $(i=$(cat /sys/class/backlight/*/brightness)
-  echo $i/2.55 | bc)
+  echo $i/25 | bc)0
 }
 
 mem() {
