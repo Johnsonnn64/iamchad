@@ -1031,7 +1031,6 @@ void detachstack(Client *c) {
 
 Monitor *dirtomon(int dir) {
   Monitor *m = NULL;
-
   if (dir > 0) {
     if (!(m = selmon->next))
       m = mons;
@@ -1699,7 +1698,7 @@ void focusmon(const Arg *arg) {
  {
    Monitor *m;
    for (m = mons; m && m->num != arg->i; m = m->next);
-   if (m == selmon)
+   if (!m || m == selmon)
      return;
    unfocus(selmon->sel, 0);
    XWarpPointer(dpy, None, m->barwin, 0, 0, 0, 0, m->mw / 2, m->mh / 2);

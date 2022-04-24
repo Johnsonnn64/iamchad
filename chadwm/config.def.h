@@ -137,7 +137,7 @@ const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "lfrun", NULL };
 const char *spcmd3[] = {"st", "-n", "spcalcu", "-g", "80x30", "-e", "bc", "-lq", NULL };
 const char *spcmd4[] = {"st", "-n", "spvolume", "-g", "115x20", "-e", "pulsemixer", NULL };
-const char *spcmd5[] = {"st", "-n", "spgotop", "-g", "115x35", "-e", "gotop", NULL };
+const char *spcmd5[] = {"st", "-n", "spgotop", "-g", "115x35", "-e", "btop", NULL };
 const char *spcmd6[] = {"st", "-n", "spcurse", "-g", "100x30+1200+5", "-e", "calcurse", NULL };
 static Sp scratchpads[] = {
   /* name          cmd  */
@@ -153,6 +153,9 @@ static Key keys[] = {
   /*test*/
   /* modifier                        key             function        argument */
   { MODKEY,                          XK_q,           killclient,     {0 } },
+
+  { MODKEY,                          XK_e,           hidewin,        {0 } },
+  { MODKEY|ShiftMask,                XK_e,           restorewin,     {0 } },
 
   { MODKEY,                          XK_r,           spawn,          {.v = term }},
   { MODKEY|ShiftMask,                XK_r,           quit,           {1 } },
@@ -200,9 +203,6 @@ static Key keys[] = {
   { MODKEY|ShiftMask|ControlMask,    XK_l,           moveresize,     {.v = "0x 0y 25w 0h" } },
   { ControlMask|ShiftMask,           XK_l,           moveresize,     {.v = "25x 0y 0w 0h" } },
 
-  { MODKEY,                          XK_z,           hidewin,        {0 } },
-  { MODKEY|ShiftMask,                XK_z,           restorewin,     {0 } },
-
   { MODKEY|ControlMask,              XK_c,           togglescratch,  {.ui = 5} },
 
   { MODKEY|ControlMask,              XK_v,           togglescratch,  {.ui = 3} },
@@ -237,6 +237,8 @@ static Key keys[] = {
   { MODKEY|ShiftMask,                XK_equal, 	     setborderpx,    {.i = +1 } },
   { MODKEY|ShiftMask|ControlMask,    XK_equal,       incnmaster,     {.i = +1 } },
 
+  { MODKEY,                          XK_F5,          spawn,          SHCMD("sudo xbacklight -dec 5") },
+  { MODKEY,                          XK_F6,          spawn,          SHCMD("sudo xbacklight -inc 5") },
   { MODKEY,                          XK_F7,          spawn,          SHCMD("dmenuumount.sh") },
   { MODKEY,                          XK_F8,          spawn,          SHCMD("dmenumount.sh") },
   { MODKEY,                          XK_F9,          togglescratch,  {.ui = 2 } },
